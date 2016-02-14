@@ -1,5 +1,5 @@
 body {
-	background-color:gold;
+	background-color:#74513A;
 	padding:7px 0px 0px 0px; /*top right bottom left*/	 	 
 }
 h1 {
@@ -15,11 +15,11 @@ h1 {
 	margin-right: auto;
 	font-family: Helvetica, sans-serif;
 	border-radius: 25px;
-    border: 15px solid black; 
+    border: 15px solid #351C13; 
 }
 header {
-	color:gold;
-    background-color:black;
+	color:#FFF38C;
+    background-color:#351C13;
     text-align:center;
     padding:1px;
 }
@@ -50,7 +50,7 @@ nav table {
 nav table .currentpage {
     background-color:black;
 	text-align:center;
-	color:gold;
+	color:#74513A;
 	font-weight: bold;
 }
 
@@ -60,7 +60,7 @@ section {
 }
 footer {
     background-color:black;
-	color:gold;
+	color:#74513A;
     font-size: 12px;
     clear:both;
     text-align:center;

@@ -40,7 +40,7 @@ function leftMenu() {
 	document.getElementById('leftMenu').innerHTML = output;
 }
 function topHeader() {
-	document.getElementById('topHeader').innerHTML =  "<table style=\"width:100%;border-collapse:collapse;\"><tr><td style=\"width:20%;padding:0px 0px 2px 0px;\"><img src=\"img/logo-gold.png\" style=\"float:left;height:88px;\"></td><td style=\"width:60%;padding:0px;\"><h2>"+WALLET_TITLE+"</h2><h1>"+WALLET_NAME+"</h1></td><td style=\"width:20%;padding:0px;\">&nbsp;</td></tr></table>";
+	document.getElementById('topHeader').innerHTML =  "<table style=\"width:100%;border-collapse:collapse;\"><tr><td style=\"width:20%;padding:0px 0px 2px 0px;\"><img src=\"img/logo-sog-small.png\" style=\"float:left;height:88px;\"></td><td style=\"width:60%;padding:0px;\"><h2>"+WALLET_TITLE+"</h2><h1>"+WALLET_NAME+"</h1></td><td style=\"width:20%;padding:0px;\">&nbsp;</td></tr></table>";
 	//document.getElementById('topHeader').innerHTML =  "<img src=\"img/logo-gold.png\" style=\"float:left;height:88px;\"><h2 style=\"position:relative;\">"+WALLET_TITLE+"</h2><h1 style=\"position:relative;\">"+WALLET_NAME+"</h1>";
 }
 function bottomFooter() {
