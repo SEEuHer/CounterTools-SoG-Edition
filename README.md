@@ -1,5 +1,9 @@
-# CounterTools
-CounterTools is a modular JavaScript Bitcoin and Counterparty GUI Wallet.
+# CounterTools SoG Edition
+CounterTools SoG Edition is a special version of CounterTools.
+
+The logo and colors are inspired by SoG. The wallet balance view prioritizes BITCRYSTALS and SoG Cards. Cards are shown on hover. 
+
+Work in progress.
 
 Download the zip file, extract the directory and open index.html. Follow instructions in the GUI.
 
