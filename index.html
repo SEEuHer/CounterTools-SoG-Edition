@@ -46,13 +46,13 @@ function drawWallet() {
 	var numAddr = Math.min(NUM_ADDR_DISPLAY, MY_ADDR.length);
 	
 	var tablecode = "<table id=\"walletbalances\">";
-	if (MY_ADDR[0] == "1AeEhRpChp1TteqBTkC4GPmyQJgH31MMmK") tablecode += "<tr><td style=\"background-color:orange;padding:8px;text-align:center;border:2px solid black;\" colspan=\"2\"><b>This is a DEMO wallet</b><br>To create your own wallet you must first <a href=\"generatepp.html\">generate</a> and <a href=\"encrypt.html\">encrypt</a> a passphrase.</td></tr><tr><td colspan=\"2\">&nbsp;</td></tr>";
+	if (MY_ADDR[0] == "1NHbhG3vuGuHSypFg6vASvErW1YHmmV2RW") tablecode += "<tr><td style=\"background-color:orange;padding:8px;text-align:center;border:2px solid black;\" colspan=\"2\"><b>This is a DEMO wallet</b><br>To create your own wallet you must first <a href=\"generatepp.html\">generate</a> and <a href=\"encrypt.html\">encrypt</a> a passphrase.</td></tr><tr><td colspan=\"2\">&nbsp;</td></tr>";
 	for (i = 0; i < numAddr; i++) {
-		tablecode += "<tr class=\"traddr\"><td>#"+(i+1)+" "+MY_ADDR[i]+"</td><td class=\"cellicons\" id=\"icons"+i+"\"></td></tr>";
-		tablecode += "<tr class=\"trbtc\"><td class=\"cellassetid\">BTC</td><td class=\"cellbalance\" id=\"btcbalance"+i+"\"></td></tr>";
-		tablecode += "<tr class=\"trbtc\"><td class=\"cellprice\"id=\"btcprice"+i+"\">&nbsp;</td><td  class=\"cellvalue\" id=\"mybtcvalue"+i+"\"></td></tr>";
-		tablecode += "<tr class=\"trxcp\"><td class=\"cellassetid\">XCP</td><td class=\"cellbalance\"  id=\"xcpbalance"+i+"\"></td></tr>";
-		tablecode += "<tr class=\"trxcp\"><td  class=\"cellprice\" id=\"xcpprice"+i+"\">&nbsp;</td><td  class=\"cellvalue\" id=\"myxcpvalue"+i+"\"></td></tr>";
+		tablecode += "<tr class=\"traddr\"><td>#"+(i+1)+" "+MY_ADDR[i]+"</td><td class=\"cellicons\" id=\"icons"+i+"\" style=\"text-align:right;\"></td></tr>";
+		tablecode += "<tr class=\"trbtc\"><td class=\"cellassetid\">BTC</td><td class=\"cellbalance\" id=\"btcbalance"+i+"\" style=\"text-align:right;\"></td></tr>";
+		tablecode += "<tr class=\"trbtc\"><td class=\"cellprice\"id=\"btcprice"+i+"\">&nbsp;</td><td  class=\"cellvalue\" id=\"mybtcvalue"+i+"\" style=\"text-align:right;\"></td></tr>";
+		tablecode += "<tr class=\"trxcp\"><td class=\"cellassetid\">BITCRYSTALS</td><td class=\"cellbalance\"  id=\"xcpbalance"+i+"\" style=\"text-align:right;\"></td></tr>";
+		tablecode += "<tr class=\"trxcp\"><td  class=\"cellprice\" id=\"xcpprice"+i+"\">&nbsp;</td><td  class=\"cellvalue\" id=\"myxcpvalue"+i+"\" style=\"text-align:right;\"></td></tr>";
 		tablecode += "<tr class=\"trassets\"><td class=\"cellassets\" id=\"assets"+i+"\" colspan=\"2\"></td></tr>";
 	}
 	tablecode += "</table>";
@@ -102,7 +102,7 @@ function getPrintBTCbalances(numAddr) {
 function getPrintXCPbalances(numAddr) {
 	var jsondata = "";	
 	for (i = 0; i < numAddr; i++) {
-		xcpBalance[i] = getXcpBalance(MY_ADDR[i]);
+		xcpBalance[i] = getBalance(MY_ADDR[i], "BITCRYSTALS");
 		document.getElementById('xcpbalance' + i).innerHTML = walletFormat(xcpBalance[i]);
 	}
 }
@@ -133,15 +133,20 @@ function getSortAssetBalances(numAddr) {
 		var ind = -1;
 		//-Priority assets
 		for(j=0; j < assetName[i].length; j++){
-			if (POPULAR_ASSETS.indexOf(assetName[i][j]) > -1 && assetBalance[i][j] >= MIN_BALANCE_DISPLAY && IGNORE_ASSETS.indexOf(assetName[i][j]) == -1 && assetName[i][j] != "?" && assetName[i][j] != "-1" && assetName[i][j] != "XCP") {
+			if (POPULAR_ASSETS.indexOf(assetName[i][j]) > -1 && assetBalance[i][j] >= MIN_BALANCE_DISPLAY && IGNORE_ASSETS.indexOf(assetName[i][j]) == -1 && assetName[i][j] != "?" && assetName[i][j] != "-1" && assetName[i][j] != "BITCRYSTALS") {
 				ind += 1;
 				assetNameSorted[i][ind] = assetName[i][j];
 				assetBalanceSorted[i][ind] = assetBalance[i][j];
 			}
 		}
+		//XCP
+		ind += 1;
+		assetNameSorted[i][ind] = "XCP";		
+		assetBalanceSorted[i][ind] = getXcpBalance(MY_ADDR[i]);		
+		
 		//-Alphabetic assets
 		for(j=0; j < assetName[i].length; j++){
-			if (POPULAR_ASSETS.indexOf(assetName[i][j]) == -1 && assetName[i][j][0] != "A" && assetBalance[i][j] >= MIN_BALANCE_DISPLAY && IGNORE_ASSETS.indexOf(assetName[i][j]) == -1 && assetName[i][j] != "?" && assetName[i][j] != "-1" && assetName[i][j] != "XCP") {
+			if (POPULAR_ASSETS.indexOf(assetName[i][j]) == -1 && assetName[i][j][0] != "A" && assetBalance[i][j] >= MIN_BALANCE_DISPLAY && IGNORE_ASSETS.indexOf(assetName[i][j]) == -1 && assetName[i][j] != "?" && assetName[i][j] != "-1" && assetName[i][j] != "BITCRYSTALS") {
 				ind += 1;
 				assetNameSorted[i][ind] = assetName[i][j];
 				assetBalanceSorted[i][ind] = assetBalance[i][j];
@@ -149,7 +154,7 @@ function getSortAssetBalances(numAddr) {
 		}
 		//-Numeric assets
 		for(j=0; j < assetName[i].length; j++){
-			if (POPULAR_ASSETS.indexOf(assetName[i][j]) == -1 && assetName[i][j][0] == "A" && assetBalance[i][j] >= MIN_BALANCE_DISPLAY && IGNORE_ASSETS.indexOf(assetName[i][j]) == -1 && assetName[i][j] != "?" && assetName[i][j] != "-1" && assetName[i][j] != "XCP") {
+			if (POPULAR_ASSETS.indexOf(assetName[i][j]) == -1 && assetName[i][j][0] == "A" && assetBalance[i][j] >= MIN_BALANCE_DISPLAY && IGNORE_ASSETS.indexOf(assetName[i][j]) == -1 && assetName[i][j] != "?" && assetName[i][j] != "-1" && assetName[i][j] != "BITCRYSTALS") {
 				ind += 1;
 				assetNameSorted[i][ind] = assetName[i][j];
 				assetBalanceSorted[i][ind] = assetBalance[i][j];
@@ -172,6 +177,7 @@ function getSortAssetBalances(numAddr) {
 				var assetDescrLink = anchorme.js(assetDescription,{"target":"_blank"});
 				//Properties - add symbol after name
 				var properties = '';
+				var image = '';
 				if (indAsset != -1 && ASSET_LIST[indAsset][2] == MY_ADDR[i]) { //Address is asset's owner
 					properties += "&nbsp;<span style=\"color:DarkGreen;\" title=\"Own asset\">⚘</span>";
 				}
@@ -180,6 +186,7 @@ function getSortAssetBalances(numAddr) {
 				}
 				if (POPULAR_ASSETS.indexOf(assetNameSorted[i][j]) > -1) { //Priority/popular asset (set your own under settings)
 					properties += "&nbsp;<span style=\"color:DarkGoldenRod;\" title=\"Popular asset\">★</span>";
+					image = "<img src=\"spellsofgenesis/"+assetNameSorted[i][j]+".jpg\" style=\"height:100px\">";
 				}
 				if (CONTORVERSIAL_ASETS.indexOf(assetNameSorted[i][j]) > -1) { //Suspected fraud
 					properties += "&nbsp;<span style=\"color:DarkRed;\" title=\"Suspected fraud\">☢</span>";
@@ -189,7 +196,7 @@ function getSortAssetBalances(numAddr) {
 				父 = parent or child asset
 				Blockchain Validated Asset Metadata (BVAM)
 				*/
-				assetTable[i] += "<tr class=\""+rowclass+"\"><td class=\"cellassetid\"><a href=\"https://counterpartychain.io/asset/"+assetNameSorted[i][j]+"\" target=\"_blank\">"+assetNameSorted[i][j]+"</a>"+properties+"</td><td>"+walletFormat(assetBalanceSorted[i][j])+"</td></tr>";
+				assetTable[i] += "<tr class=\""+rowclass+"\"><td rowspan=\"2\">"+image+"</td><td class=\"cellassetid\"><a href=\"https://counterpartychain.io/asset/"+assetNameSorted[i][j]+"\" target=\"_blank\">"+assetNameSorted[i][j]+"</a>"+properties+"</td><td>"+walletFormat(assetBalanceSorted[i][j])+"</td></tr>";
 				assetTable[i] += "<tr class=\""+rowclass+"\"><td class=\"cellassetdescription\" colspan=\"2\">&nbsp;"+assetDescrLink+"</td></tr>";
 			}
 			assetTable[i] += "</table>";
@@ -206,14 +213,13 @@ function printAssetBalances(ind) {
 
 function getPrintBtcXcpPrices(numAddr) {
 	var btcPrice = getPrice('BTC');
-	var xcpPrice = getPrice('XCP');
-	var btcPrice = getPrice('BTC');
+	var xcpPrice = getPrice('BCY');
 	btcPriceUSD = btcPrice.usd;
 	xcpPriceUSD = xcpPrice.usd;
 	xcpPriceBTC = xcpPrice.btc;
 	
 	document.getElementById('btcprice0').innerHTML =  "&nbsp;1 BTC = "+walletFormatUSD(btcPriceUSD)+" USD";
-	document.getElementById('xcpprice0').innerHTML =  "&nbsp;1 XCP = "+walletFormatUSD(xcpPriceUSD)+" USD = "+walletFormatBTC(xcpPriceBTC)+" BTC";
+	document.getElementById('xcpprice0').innerHTML =  "&nbsp;1 BCY = "+displayNumber(xcpPriceUSD,3)+" USD = "+walletFormatBTC(xcpPriceBTC)+" BTC";
 	for (i = 0; i < numAddr; i++) {
 		if(isNaN(btcPriceUSD) || isNaN(btcBalance[i])) {
 		
@@ -313,8 +319,8 @@ function viewSendForm(ind) {
 	optionsBalance[optionsCount] = btcBalance[ind] - TX_FEE;
 	optionsCount += 1;
 	if (isNaN(xcpBalance[ind]) == false && xcpBalance[ind] != 0) {
-		optionsValue[optionsCount] = "XCP";
-		optionsDisplay[optionsCount] = "XCP";
+		optionsValue[optionsCount] = "BITCRYSTALS";
+		optionsDisplay[optionsCount] = "BITCRYSTALS";
 		optionsBalance[optionsCount] = xcpBalance[ind];
 		optionsCount += 1;
 	}
@@ -357,7 +363,7 @@ function getMaxAmount(ind) {
 	var balance = 0;
 	if (selected == "BTC") {
 		balance = btcBalance[ind] - TX_FEE;
-	} else if (selected == "XCP") {
+	} else if (selected == "BITCRYSTALS") {
 		balance = xcpBalance[ind];
 	} else {
 		balance = assetBalanceSorted[ind][assetNameSorted[ind].indexOf(selected)];
@@ -407,7 +413,7 @@ function confirmSend(ind) {
 		tablecode += "Asset: "+assetReadable(asset)+"<br>";
 		tablecode += "Amount: "+maxAmountSendFormat(amount);
 		if (asset == 'BTC' && !isNaN(btcPriceUSD)) tablecode += " ($" + (amount*btcPriceUSD).toFixed(2) + ")";
-		if (asset == 'XCP' && !isNaN(xcpPriceUSD)) tablecode += " ($" + (amount*xcpPriceUSD).toFixed(2) + ")";
+		if (asset == 'BITCRYSTALS' && !isNaN(xcpPriceUSD)) tablecode += " ($" + (amount*xcpPriceUSD).toFixed(2) + ")";
 		tablecode += "<br>To: "+recipientPrint+"<br>";
 		tablecode += "Cost: BTC " + costBTC.toFixed(8);
 		if (!isNaN(btcPriceUSD)) tablecode += " ($" + (costBTC*btcPriceUSD).toFixed(2) + ")";

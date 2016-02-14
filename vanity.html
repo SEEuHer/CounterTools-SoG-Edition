@@ -286,12 +286,15 @@ function outputPassphrase(passphrase) {
 <nav id="leftMenu"></nav>
 <section id="mainSection">
 
-<h1>Passphrase with Vanity Addresses</h1>
-<div class="boxInfo">A vanity address starts with a special pattern.<br><br>E.g. you can specify that the 1st address starts with '123' or all three start with '1A'.</div>Enter Random Characters<br>
+<h1>Make a Special SoG Address</h1>
+<div class="boxInfo">The passphrase is compatible with Counterwallet.<br><br>The address you generate can be used there as well.</div>
+
+Generate a new passphrase such that your address starts with '1SG', '1SoG' or anything you wish. The script tests thousands of passphrases until it discoveres the right pattern. Please be patient. It can take hours to find it.<br><br>
+Enter Random Characters<br>
 <input type="password" onkeyup="validateInputPW()" id="password" placeholder="" style="width:545px;"><br>
 <div id="pwfeedback" style="margin:0px 0px 10px 0px;">&nbsp;</div>
 1st Pattern:<br>
-<input type="text" onkeyup="validateInputPW()" id="pattern1" value="1A" style="width:100px;"><br>
+<input type="text" onkeyup="validateInputPW()" id="pattern1" value="1SG" style="width:100px;"><br>
 2nd Pattern (Optional):<br>
 <input type="text" onkeyup="validateInputPW()" id="pattern2" value="1" style="width:100px;"><br>
 3rd Pattern (Optional):<br>

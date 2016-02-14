@@ -59,7 +59,7 @@ section {
     padding:10px;	 	 
 }
 footer {
-    background-color:black;
+    background-color:#351C13;
 	color:#74513A;
     font-size: 12px;
     clear:both;
@@ -93,7 +93,7 @@ textarea:focus, input:focus {
 	border: 3px solid LightSlateGrey;
 	margin:5px 0px 5px 5px; /*top right bottom left*/	
 	padding: 5px;
-	background-color:LightSteelBlue;
+	background-color:#FFF38C;
 	width:180px;
 }
 .boxWarning {
@@ -120,12 +120,12 @@ textarea:focus, input:focus {
 #walletbalances td {
 	padding:7px 7px 7px 7px; /*top right bottom left*/
 }
-#walletbalances td:nth-child(1) {
+#walletbalances td:nth-child(2) {
 	text-align:left;
 }
-#walletbalances td:nth-child(2) {
+#walletbalances td:nth-child(3) {
 	text-align:right;
-	float:right;
+	/*float:right;*/
 }
 #walletbalances .traddr {
 	padding:4px 7px 4px 7px; /*top right bottom left*/
