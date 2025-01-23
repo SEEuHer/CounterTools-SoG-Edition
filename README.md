@@ -22,26 +22,9 @@ Download the zip file, extract the directory and open index.html. Follow instruc
 - Broadcast text or bet
 - Make many broadcasts from a list
 - Notarize a file (broadcast file's SHA256 hash)
-- Generate new passphrase
-- Generate passphrase with vanity addresses
-- Repair a broken passphrase
-- Generate paper wallet
-- Export keys (all passphrase tools can be done on offline computer)
-- YouTube module with relevant Counterparty videos
-- Customizable design, menu and modules
-- Developer guide
- 
-## Use Cases
 
-#### Wallet
-The wallet can be used out of the box. It is meant to complement Counterwallet, Chrome Wallet and IndieSquare. The same passphrase can be used in every wallet. The advantages of this wallet are
 - All files are stored locally
-- No installation (only edit a text file)
-- Can run from a USB drive or CD rom
-- Fees can be custom set
-- Can send to alias (asset owner)
-- Supports anchored assets
-- Quick links to block explorers
+- No in
 
 DEX support and history will be added shortly.
 
